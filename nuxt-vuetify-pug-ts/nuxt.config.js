@@ -35,7 +35,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify.ts'
+    '@/plugins/vuetify.ts',
+    '@/plugins/axios.ts'
   ],
 
   /*
