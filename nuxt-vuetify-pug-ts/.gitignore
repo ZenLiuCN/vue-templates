@@ -31,4 +31,4 @@ dist
 .serverless
 .idea/
 .nuxt/
-.code/
+.vscode/

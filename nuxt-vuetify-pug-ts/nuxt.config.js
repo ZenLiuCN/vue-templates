@@ -49,8 +49,8 @@ module.exports = {
    */
   plugins: [
     '@/plugins/vuetify.ts',
-    '@/plugins/axios.ts',
     '@/plugins/vue.ts',
+    '@/plugins/axios.ts',
   ],
 
   /*
@@ -59,7 +59,8 @@ module.exports = {
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    "nuxt-typescript"
+    "nuxt-typescript",
+    // '@/modules/api',
   ],
   /*
    ** Axios module configuration

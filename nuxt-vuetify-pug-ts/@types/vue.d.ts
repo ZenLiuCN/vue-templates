@@ -1,8 +1,10 @@
-import Vue from "vue"
+import Vue from 'vue'
+import { Api } from '../api/api';
 
-declare module "vue/types/vue" {
+
+
+declare module 'vue/types/vue' {
   interface Vue {
-    //HookExample type define
-    $HookExample: Function
+    $api:Api
   }
 }

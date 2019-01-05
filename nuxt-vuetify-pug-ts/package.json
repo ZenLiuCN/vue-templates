@@ -11,6 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@mdi/font": "^3.3.92",
     "@nuxtjs/axios": "^5.0.0",
     "cross-env": "^5.2.0",
     "nuxt": "^2.0.0",
@@ -20,7 +21,6 @@
     "vuex-class": "^0.3.1"
   },
   "devDependencies": {
-    "@mdi/font": "^3.3.92",
     "@types/node": "^10.12.18",
     "nodemon": "^1.11.0",
     "nuxt-typescript": "^0.11.0",

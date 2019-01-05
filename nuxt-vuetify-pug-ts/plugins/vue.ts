@@ -1,7 +1,6 @@
-import Vue from "vue"
+import Vue from 'vue'
 
-export default function VueHooker() {
-  Vue.prototype.$HookExample = () => {
-    console.warn("this is hook example")
-  }
-}
+import { Api } from '~/api/api';
+
+
+// Vue.prototype.$api=new Api(axios,host)
