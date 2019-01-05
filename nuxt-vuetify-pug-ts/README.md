@@ -1,10 +1,10 @@
-# nuxt-vuetify-pug-ts
+# nuxt-vuetify-pug-ts (nuxted)
 
-> template for nuxt vuetify pug and TS
+> an out of box web framwork based on vuejs nuxt vuetify and take advantage of Pug Typescript stlyus
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ yarn install
 
@@ -18,5 +18,3 @@ $ yarn start
 # generate static project
 $ yarn run generate
 ```
-
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
