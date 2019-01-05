@@ -78,6 +78,6 @@ dist
 .serverless
 
 # IDE
-.idea
-/.idea/
-/.nuxt/
+.idea/
+.nuxt/
+.code/
