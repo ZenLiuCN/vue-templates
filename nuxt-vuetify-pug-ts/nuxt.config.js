@@ -36,7 +36,8 @@ module.exports = {
   */
   plugins: [
     '@/plugins/vuetify.ts',
-    '@/plugins/axios.ts'
+    '@/plugins/axios.ts',
+    '@/plugins/vueHook.ts',
   ],
 
   /*
