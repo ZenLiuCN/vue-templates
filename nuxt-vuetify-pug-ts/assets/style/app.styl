@@ -1,6 +1,19 @@
 // Import Vuetify styling
-@require '~vuetify/src/stylus/main.styl'
+@import '~vuetify/src/stylus/main.styl'
 
-.cursor-pointer {
+// !fix scroll bar
+html
+    overflow: hidden
+
+body
+    overflow: hidden
+
+.container
+    overflow: auto
+
+.containt
+    overflow: auto
+
+// !end fix scroll bar
+.cursor-pointer
     cursor: pointer
-}

@@ -1,11 +1,19 @@
+import { LoginedUser } from '~/@types/api';
+
 class UserState {
   token: string = ''
+  id: string = ''
+  name: string = ''
 }
 class UserGetter {
-  isLogin = (s: UserState) => s.token != ''
+  isLogin = (s: UserState) => s.token !== ''
 }
-class UserMutation {}
-class UserAction {}
+class UserMutation {
+  setUser = (s: UserState, u: LoginedUser) => {
+    Object.assign(s, u)
+  }
+}
+class UserAction { }
 
 export const state = () => new UserState()
 export const getters = new UserGetter()

@@ -10,7 +10,7 @@
         v-for="item in menus"
         :key="item.title"
       )
-        v-list-group(    
+        v-list-group(
           v-if="item.child&&item.child.length>0"
           )
           v-tooltip(v-if="miniVariant" right slot="prependIcon")
@@ -19,8 +19,8 @@
           v-icon(v-else slot="prependIcon") {{'mdi-'+item.icon}}
           v-list-tile(slot="activator"): v-list-tile-content(): v-list-tile-title(v-text="item.title")
           v-list-tile(
-            v-for="itm in item.child"  
-            :key="itm.title"  
+            v-for="itm in item.child"
+            :key="itm.title"
             :to="itm.to"
             router
             exact)
@@ -48,7 +48,7 @@
       v-toolbar-title(v-text="title")
       v-spacer/
       v-btn(icon @click.stop="rightDrawer = !rightDrawer"): v-icon mdi-menu
-    v-content(): v-container(): nuxt
+    v-content(): v-container(fill-height fluid full-width): nuxt
     v-navigation-drawer(temporary :right="right" v-model="rightDrawer" fixed)
       v-list
         v-list-tile.cursor-pointer(@click.native="right = !right")
@@ -62,7 +62,7 @@
 import { Vue, Component, State, Watch } from "nuxt-property-decorator";
 import { setTimeout } from "timers";
 
-@Component({ name: "default" })
+@Component({ name: "default", middleware: 'log' })
 export default class extends Vue {
   active = ""
   clipped = false
@@ -71,10 +71,12 @@ export default class extends Vue {
   miniVariant = true
   right = true
   rightDrawer = false
+
   @State menus
   @State title
   @State autoMiniVariant!: boolean
   @State miniTimeout!: number
+
   @Watch("miniVariant") onMiniVariantChange(val: boolean, old: boolean) {
     if (this.autoMiniVariant && !val) {
       setTimeout(() => this.miniVariant = true, this.miniTimeout)

@@ -12,18 +12,18 @@ class RootState {
       icon: 'file-tree',
       title: 'submenus',
       child: [
-        { icon: 'apps', title: 'Welcome', to: '/' },
-        { icon: 'chart-bubble', title: 'Inspire', to: '/inspire' },
+        { icon: 'apps', title: 'login', to: '/login' },
+        { icon: 'xbox-controller', title: 'elements', to: '/elements' },
         { icon: 'ammunition', title: 'nuxted', to: '/nuxted' }
       ]
     }
   ]
 }
-class RootGetter {}
+class RootGetter { }
 class RootMutation {
   setTitle = (s: RootState, title: string) => (s.title = title)
 }
-class RootAction {}
+class RootAction { }
 export const state = () => new RootState()
 export const getters = new RootGetter()
 export const mutations = new RootMutation()

@@ -7,3 +7,10 @@ export interface LoginParam {
   username: string;
   password: string;
 }
+
+export interface LoginedUser {
+  token: string
+  id?: string
+  name?: string
+  username?: string
+}
