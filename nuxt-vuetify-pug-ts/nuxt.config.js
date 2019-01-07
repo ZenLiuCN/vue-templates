@@ -9,23 +9,23 @@ module.exports = {
   head: {
     title: pkg.name,
     meta: [{
-        charset: 'utf-8'
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: pkg.description
-      }
+      charset: 'utf-8'
+    },
+    {
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1'
+    },
+    {
+      hid: 'description',
+      name: 'description',
+      content: pkg.description
+    }
     ],
     link: [{
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      },
+      rel: 'icon',
+      type: 'image/x-icon',
+      href: '/favicon.ico'
+    },
       //!{ rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
@@ -50,6 +50,7 @@ module.exports = {
   plugins: [
     '@/plugins/vuetify.ts',
     '@/plugins/vue.ts',
+    '@/plugins/filters.ts',
     '@/plugins/axios.ts',
   ],
 

@@ -1,12 +1,10 @@
-import Vue from 'vue'
-
-import { Api } from '~/api/api';
-
-Vue.filter('overflow', (data: string, len: number) => {
-    if (data.length > len) {
-        return data.substring(0, len) + '...'
+declare global {
+    interface Array<T> {
+        fold(init: any, lambda: (init: any, element: T) => any)
     }
-    return data
-})
+}
 
-// Vue.prototype.$api=new Api(axios,host)
+Array.prototype.fold = function (init: any, lambda: (init: any, element) => any) {
+    this.forEach(item => lambda(init, item))
+}
+export { }

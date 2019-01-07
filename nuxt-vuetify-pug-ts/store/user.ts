@@ -1,21 +1,34 @@
 import { LoginedUser } from '~/@types/api';
+import { ActionContext } from 'vuex';
+import { RootState } from '.';
+/* #region Class */
 
-class UserState {
+export class UserState {
   token: string = ''
   id: string = ''
   name: string = ''
 }
-class UserGetter {
+export class UserGetter {
   isLogin = (s: UserState) => s.token !== ''
 }
-class UserMutation {
+export class UserMutation {
   setUser = (s: UserState, u: LoginedUser) => {
     Object.assign(s, u)
   }
 }
-class UserAction { }
+/* #endregion */
 
+/* #region Exports */
 export const state = () => new UserState()
 export const getters = new UserGetter()
 export const mutations = new UserMutation()
-export const actions = new UserAction()
+export const actions = {
+  doLogin(store: ActionContext<UserState, RootState>) {
+
+  },
+  loading() {
+
+  }
+}
+
+/* #endregion */

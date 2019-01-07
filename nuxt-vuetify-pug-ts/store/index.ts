@@ -1,6 +1,6 @@
 import { MenuItem } from '../@types/MenuItem'
-
-class RootState {
+/* #region Classes */
+export class RootState {
   title: string = 'nuxted web framework'
   autoMiniVariant: boolean = false
   miniTimeout: number = 3000
@@ -19,12 +19,17 @@ class RootState {
     }
   ]
 }
-class RootGetter { }
-class RootMutation {
+export class RootGetter { }
+export class RootMutation {
   setTitle = (s: RootState, title: string) => (s.title = title)
 }
-class RootAction { }
+export class RootAction { }
+/* #endregion */
+/* #region Exports */
+
 export const state = () => new RootState()
 export const getters = new RootGetter()
 export const mutations = new RootMutation()
 export const actions = new RootAction()
+
+/* #endregion */
