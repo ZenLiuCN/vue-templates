@@ -1,19 +1,47 @@
 // Import Vuetify styling
 @import '~vuetify/src/stylus/main.styl'
+@import 'theme.styl'
 
-// !fix scroll bar
-html
-    overflow: hidden
+// .theme--dark.application
+// background-color: $dark-background
 
+// .theme--dark.v-toolbar
+// background-color: $dark-background
+
+// .theme--dark.v-navigation-drawer,
+// .theme--dark.v-card,
+// .theme--dark.v-list,
+// .theme--dark.v-sheet
+// background-color: $dark-background-light
+html,
 body
     overflow: hidden
+    height: 100%
 
-.container
+#__nuxt
+    height: 100%
     overflow: auto
 
-.containt
-    overflow: auto
+/* width */
+::-webkit-scrollbar /* width */
+    width: 8px
 
-// !end fix scroll bar
-.cursor-pointer
+/* Track */
+::-webkit-scrollbar-track /* Track */
+    background: #f1f1f1
+    box-shadow: inset 0 0 3px var(--v-primary-base)
+    border-radius: 2px
+
+/* Handle */
+::-webkit-scrollbar-thumb /* Handle */
+    background: var(--v-primary-base)
+    box-shadow: inset 0 0 2px grey
+    border-radius: 2px
     cursor: pointer
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover /* Handle on hover */
+    background: var(--v-primary-base-lighten1)
+
+@import 'svg.styl'
+@import 'wapper.styl'

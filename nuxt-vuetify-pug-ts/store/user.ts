@@ -1,34 +1,43 @@
-import { LoginedUser } from '~/@types/api';
-import { ActionContext } from 'vuex';
-import { RootState } from '.';
-/* #region Class */
+import { LoginParam } from '~/model/model'
+import { ActionContext } from 'vuex'
+import { State } from './index'
+import { Response, UserInfo } from '~/model/api.d'
 
-export class UserState {
-  token: string = ''
-  id: string = ''
-  name: string = ''
+export class User {
+  // token: string = ''
+  // userId: number = -1
+  // createTime: string = ''
+  // expireTime: string = ''
+  token = ''
 }
-export class UserGetter {
-  isLogin = (s: UserState) => s.token !== ''
-}
-export class UserMutation {
-  setUser = (s: UserState, u: LoginedUser) => {
-    Object.assign(s, u)
+class Getters {
+  isLogined(s: User): boolean {
+    return s.token !== ''
   }
 }
-/* #endregion */
+class Mutations {
+  assignInfo = (s: User, info: any) => {
+    Object.assign(s, info)
+  }
+}
 
-/* #region Exports */
-export const state = () => new UserState()
-export const getters = new UserGetter()
-export const mutations = new UserMutation()
 export const actions = {
-  doLogin(store: ActionContext<UserState, RootState>) {
+  async doLogin({ commit }: ActionContext<User, State>, param: LoginParam) {
+    // const r: Response<UserInfo> = await this.$axios.$post(`/login`, param)
+    // if (r.status !== 200) {
+    //   this.$messager.toast({
+    //     text: r.message ? r.message : '登录失败!',
+    //     type: 'error',
+    //     closeable: true
+    //   })
+    //   return Promise.reject(r)
+    // }
 
-  },
-  loading() {
-
+    commit('assignInfo', { token: '12345678901', name: 'DEMO' })
+    return Promise.resolve({ token: '12345678901', name: 'DEMO' })
   }
 }
 
-/* #endregion */
+export const state = () => new User()
+export const getters = new Getters()
+export const mutations = new Mutations()

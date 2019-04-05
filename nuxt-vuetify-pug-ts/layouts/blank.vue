@@ -1,21 +1,26 @@
 <template lang="pug">
-  v-app(dark)
-    v-toolbar( fixed app :clipped-left="clipped")
-      v-spacer/
-      v-toolbar-title(v-text="title")
-      v-spacer/
-    v-content(): v-container(fluid full-width full-hight): nuxt
-    v-footer(:fixed="fixed" app): span.ml-4 &copy;{{new Date().getFullYear()}}
-
+  v-app()
+    // v-toolbar(dese).primary.text-xs-center
+    //   v-spacer
+    //   v-toolbar-title().white--text.header.ml-0 {{title}}
+    //   v-spacer
+    v-content(): v-container(fluid)
+      PAlert()
+      nuxt
 </template>
 
 <script lang="ts">
-import { Vue, Component, State, Watch } from "nuxt-property-decorator";
+import { Vue, Component, State, Watch, namespace } from "nuxt-property-decorator";
+import PAlert from '~/components/PAlert.vue'
+const GLOB = namespace("global")
+@Component({ name: "blank", components: { PAlert } })
+export default class LayoutBlank extends Vue {
+  @GLOB.State title;
 
-@Component({ name: 'blank', middleware: 'log' })
-export default class Blank extends Vue {
-  clipped = false
-  fixed = false
-  @State title
+  head() {
+    return {
+      title: this.title
+    };
+  }
 }
 </script>

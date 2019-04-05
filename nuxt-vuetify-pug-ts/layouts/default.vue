@@ -1,33 +1,33 @@
 <template lang="pug">
-  v-app(dark)
+  v-app(:dark="dark")
     v-navigation-drawer(
-    :mini-variant.sync="miniVariant"
-    :clipped="clipped"
-    v-model="drawer"
-    fixed
-    app): v-list
-      div(
-        v-for="item in menus"
+      ref="_d"
+      :mini-variant.sync="miniVariant"
+      :clipped="clipped"
+      v-model="drawer"
+      fixed
+      app)
+      v-list(): div(
+        v-for="item in menu",
         :key="item.title"
       )
-        v-list-group(
-          v-if="item.child&&item.child.length>0"
-          )
+        v-list-group(v-if="item.child&&item.child.length>0")
           v-tooltip(v-if="miniVariant" right slot="prependIcon")
-              v-icon(slot="activator") {{'mdi-'+item.icon}}
+              component(:is='item.icon',slot="activator",:class="[item.iconColor?item.iconColor:'','',]")
               span {{item.tip?item.tip:item.title}}
-          v-icon(v-else slot="prependIcon") {{'mdi-'+item.icon}}
-          v-list-tile(slot="activator"): v-list-tile-content(): v-list-tile-title(v-text="item.title")
+          component(:is="item.icon", v-else,slot="prependIcon",:class="[item.iconColor?item.iconColor:'','',]")
+          v-list-tile(slot="activator"): v-list-tile-content(@click="tryRoute(item)"): v-list-tile-title(v-text="item.title")
           v-list-tile(
             v-for="itm in item.child"
             :key="itm.title"
             :to="itm.to"
             router
+            nuxt
             exact)
             v-tooltip(v-if="miniVariant" right)
-              v-list-tile-action(slot="activator"): v-icon(small) {{'mdi-'+itm.icon}}
+              v-list-tile-action(slot="activator"): component(:is='itm.icon',:class="[item.iconColor?item.iconColor:'']")
               span {{itm.tip?itm.tip:itm.title}}
-            v-list-tile-action(v-else).ml-3: v-icon {{'mdi-'+itm.icon}}
+            v-list-tile-action(v-else).ml-3: component(:is='itm.icon',:class="[item.iconColor?item.iconColor:'']")
             v-list-tile-content(): v-list-tile-title(v-text="itm.title")
         v-list-tile(
           v-else
@@ -36,52 +36,76 @@
           exact
           )
           v-tooltip(v-if="miniVariant" right)
-            v-list-tile-action(slot="activator"): v-icon {{'mdi-'+item.icon}}
+            v-list-tile-action(slot="activator"): component(:is="item.icon",:class="[item.iconColor?item.iconColor:'']")
             span {{item.tip?item.tip:item.title}}
-          v-list-tile-action(v-else): v-icon {{'mdi-'+item.icon}}
+          v-list-tile-action(v-else): component(:is="item.icon",:class="[item.iconColor?item.iconColor:'']")
           v-list-tile-content(): v-list-tile-title(v-text="item.title")
-    v-toolbar( fixed app :clipped-left="clipped")
-      v-toolbar-side-icon(@click="drawer = !drawer")
-      v-btn( icon @click.stop="miniVariant = !miniVariant"): v-icon(v-html="miniVariant ? 'mdi-chevron-right' : 'mdi-chevron-left'")
-      v-btn( icon @click.stop="clipped = !clipped"): v-icon mdi-web
-      v-btn( icon @click.stop="fixed = !fixed"): v-icon mdi-border-top-variant
+    v-toolbar(fixed,app,:clipped-left="clipped",dense).primary.white--text.elevation-0
+      v-tooltip(bottom)
+        v-toolbar-side-icon(slot='activator' @click="drawer = !drawer"): MdiMenu(:class="iconThemeColor")
+        span {{drawer?'隐藏':'显示'}}主菜单
+      v-btn(v-if="drawer" icon @click.stop="miniVariant = !miniVariant")
+        component(:is="miniVariant ? 'mdi-chevron-right' : 'mdi-chevron-left'",:class="iconThemeColor")
+      v-tooltip(bottom)
+        v-btn(icon slot="activator" @click="switchTheme")
+          mdi-brightness-6(:class="iconThemeColor")
+        span  切换{{dark?'明亮':'高对比'}}主题
+      v-spacer
       v-toolbar-title(v-text="title")
-      v-spacer/
-      v-btn(icon @click.stop="rightDrawer = !rightDrawer"): v-icon mdi-menu
-    v-content(): v-container(fill-height fluid full-width): nuxt
-    v-navigation-drawer(temporary :right="right" v-model="rightDrawer" fixed)
-      v-list
-        v-list-tile.cursor-pointer(@click.native="right = !right")
-          v-list-tile-action(): v-icon {{right?'mdi-arrow-expand-left':'mdi-arrow-expand-right'}}
-          v-list-tile-title Switch drawer {{right?'left':'right'}}(click me)
-    v-footer(:fixed="fixed" app): span.ml-4 &copy;{{new Date().getFullYear()}}
-
+      v-spacer
+      span.subheading(v-if="$vuetify.breakpoint.mdAndUp").pr-4
+        |&nbsp;{{name}}
+        span.body-1.grey--text &nbsp;
+      v-tooltip(bottom)
+        MdiExitToApp.cursor-pointer(slot="activator",@click.stop="$router.replace('/login')",class="svg-white")
+        span 退出登录
+    v-content()
+      PAlert()
+      v-container(fluid,:fill-height='fillHeight').ma-0.pa-1: nuxt()
 </template>
 
 <script lang="ts">
-import { Vue, Component, State, Watch } from "nuxt-property-decorator";
-import { setTimeout } from "timers";
+import { Vue, Component, State, Watch, Getter, namespace, Mutation } from "nuxt-property-decorator";
+import { Menu } from "~/model/internal";
+import PAlert from '~/components/PAlert.vue'
 
-@Component({ name: "default", middleware: 'log' })
+const GLOB = namespace("global")
+const USER = namespace("user")
+@Component({
+  name: "default",
+  middleware: 'logined',
+  components: { PAlert }})
 export default class extends Vue {
-  active = ""
-  clipped = false
-  drawer = true
-  fixed = false
-  miniVariant = true
-  right = true
-  rightDrawer = false
+  /* #region Base */
+  @USER.State name!: string
+  @USER.State role!: string | string[]
 
-  @State menus
-  @State title
-  @State autoMiniVariant!: boolean
-  @State miniTimeout!: number
+  @GLOB.State dark!: boolean
+  @GLOB.State title!: string
+  @GLOB.State autoMiniVariant!: boolean
+  @GLOB.State miniTimeout!: number
+  @GLOB.Getter menuOf!: (role: string | string[]) => Menu[]
+  @GLOB.Mutation switchTheme!: Function
 
+
+  clipped: boolean = true
+  drawer: boolean = true
+  miniVariant: boolean = true
+  get menu() {
+    return this.menuOf(this.role)
+  }
+  get iconThemeColor() {
+    return this.$vuetify.dark ? 'svg-white' : 'svg-white'
+  }
+  fillHeight = false
+  setFillHeight(status: boolean) {
+    this.fillHeight = status
+  }
   @Watch("miniVariant") onMiniVariantChange(val: boolean, old: boolean) {
     if (this.autoMiniVariant && !val) {
       setTimeout(() => this.miniVariant = true, this.miniTimeout)
     }
-
   }
+  /* #endregion */
 }
 </script>
