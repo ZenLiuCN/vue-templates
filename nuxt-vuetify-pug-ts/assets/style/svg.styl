@@ -1,0 +1,322 @@
+@import '~vuetify/src/stylus/settings/_colors.styl'
+@import '~vuetify/src/stylus/settings/_variables.styl'
+
+.svg
+    fill: currentColor
+
+.svg-sm
+    width: 16px
+    height: 16px
+
+.svg-nm
+    width: 24px
+    height: 24px
+
+.svg-md
+    width: 28px
+    height: 28px
+
+.svg-lg
+    height: 36px
+    width: 36px
+
+.svg-xl
+    width: 40px
+    height: 40px
+
+global-color($color_name, $color_value)
+    .svg-{$color_name}
+        fill: $color_value !important
+
+global-color-accent($color_name, $color_value, $color_type)
+    .svg-{$color_name}
+        &.{$color_type}
+            fill: $color_value !important
+
+// Put the loop in a function so it can't leak
+create-global-colors()
+    for $color_name, $color_value in $shades
+        global-color($color_name, $color_value)
+
+    if ($color-pack)
+        for $color_name, $color_color in $colors
+            for $color_type, $color_value in $color_color
+                if ($color_type == 'base')
+                    global-color($color_name, $color_value)
+                else if ($color_type != 'shades')
+                    global-color-accent($color_name, $color_value, $color_type)
+
+create-global-colors()
+
+.svg-primary
+    fill: var(--v-primary-base)
+
+.svg-secondary
+    fill: var(--v-secondary-base)
+
+.svg-accent
+    fill: var(--v-accent-base)
+
+.svg-error
+    fill: var(--v-error-base)
+
+.svg-success
+    fill: var(--v-success-base)
+
+.svg-warning
+    fill: var(--v-warning-base)
+
+.svg-info
+    fill: var(--v-info-base)
+
+.svg-primary
+    &.darken-1
+        fill: var(--v-primary-darken1)
+
+.svg-secondary
+    &.darken-1
+        fill: var(--v-secondary-darken1)
+
+.svg-accent
+    &.darken-1
+        fill: var(--v-accent-darken1)
+
+.svg-error
+    &.darken-1
+        fill: var(--v-error-darken1)
+
+.svg-success
+    &.darken-1
+        fill: var(--v-success-darken1)
+
+.svg-warning
+    &.darken-1
+        fill: var(--v-warning-darken1)
+
+.svg-info
+    &.darken-1
+        fill: var(--v-info-darken1)
+
+.svg-primary
+    &.darken-2
+        fill: var(--v-primary-darken2)
+
+.svg-secondary
+    &.darken-2
+        fill: var(--v-secondary-darken2)
+
+.svg-accent
+    &.darken-2
+        fill: var(--v-accent-darken2)
+
+.svg-error
+    &.darken-2
+        fill: var(--v-error-darken2)
+
+.svg-success
+    &.darken-2
+        fill: var(--v-success-darken2)
+
+.svg-warning
+    &.darken-2
+        fill: var(--v-warning-darken2)
+
+.svg-info
+    &.darken-2
+        fill: var(--v-info-darken2)
+
+.svg-primary
+    &.darken-3
+        fill: var(--v-primary-darken3)
+
+.svg-secondary
+    &.darken-3
+        fill: var(--v-secondary-darken3)
+
+.svg-accent
+    &.darken-3
+        fill: var(--v-accent-darken3)
+
+.svg-error
+    &.darken-3
+        fill: var(--v-error-darken3)
+
+.svg-success
+    &.darken-3
+        fill: var(--v-success-darken3)
+
+.svg-warning
+    &.darken-3
+        fill: var(--v-warning-darken3)
+
+.svg-info
+    &.darken-3
+        fill: var(--v-info-darken3)
+
+.svg-primary
+    &.darken-4
+        fill: var(--v-primary-darken4)
+
+.svg-secondary
+    &.darken-4
+        fill: var(--v-secondary-darken4)
+
+.svg-accent
+    &.darken-4
+        fill: var(--v-accent-darken4)
+
+.svg-error
+    &.darken-4
+        fill: var(--v-error-darken4)
+
+.svg-success
+    &.darken-4
+        fill: var(--v-success-darken4)
+
+.svg-warning
+    &.darken-4
+        fill: var(--v-warning-darken4)
+
+.svg-info
+    &.darken-4
+        fill: var(--v-info-darken4)
+
+.svg-primary
+    &.lighten-1
+        fill: var(--v-primary-lighten1)
+
+.svg-secondary
+    &.lighten-1
+        fill: var(--v-secondary-lighten1)
+
+.svg-accent
+    &.lighten-1
+        fill: var(--v-accent-lighten1)
+
+.svg-error
+    &.lighten-1
+        fill: var(--v-error-lighten1)
+
+.svg-success
+    &.lighten-1
+        fill: var(--v-success-lighten1)
+
+.svg-warning
+    &.lighten-1
+        fill: var(--v-warning-lighten1)
+
+.svg-info
+    &.lighten-1
+        fill: var(--v-info-lighten1)
+
+.svg-primary
+    &.lighten-2
+        fill: var(--v-primary-lighten2)
+
+.svg-secondary
+    &.lighten-2
+        fill: var(--v-secondary-lighten2)
+
+.svg-accent
+    &.lighten-2
+        fill: var(--v-accent-lighten2)
+
+.svg-error
+    &.lighten-2
+        fill: var(--v-error-lighten2)
+
+.svg-success
+    &.lighten-2
+        fill: var(--v-success-lighten2)
+
+.svg-warning
+    &.lighten-2
+        fill: var(--v-warning-lighten2)
+
+.svg-info
+    &.lighten-2
+        fill: var(--v-info-lighten2)
+
+.svg-primary
+    &.lighten-3
+        fill: var(--v-primary-lighten3)
+
+.svg-secondary
+    &.lighten-3
+        fill: var(--v-secondary-lighten3)
+
+.svg-accent
+    &.lighten-3
+        fill: var(--v-accent-lighten3)
+
+.svg-error
+    &.lighten-3
+        fill: var(--v-error-lighten3)
+
+.svg-success
+    &.lighten-3
+        fill: var(--v-success-lighten3)
+
+.svg-warning
+    &.lighten-3
+        fill: var(--v-warning-lighten3)
+
+.svg-info
+    &.lighten-3
+        fill: var(--v-info-lighten3)
+
+.svg-primary
+    &.lighten-4
+        fill: var(--v-primary-lighten4)
+
+.svg-secondary
+    &.lighten-4
+        fill: var(--v-secondary-lighten4)
+
+.svg-accent
+    &.lighten-4
+        fill: var(--v-accent-lighten4)
+
+.svg-error
+    &.lighten-4
+        fill: var(--v-error-lighten4)
+
+.svg-success
+    &.lighten-4
+        fill: var(--v-success-lighten4)
+
+.svg-warning
+    &.lighten-4
+        fill: var(--v-warning-lighten4)
+
+.svg-info
+    &.lighten-4
+        fill: var(--v-info-lighten4)
+
+.svg-primary
+    &.lighten-5
+        fill: var(--v-primary-lighten5)
+
+.svg-secondary
+    &.lighten-5
+        fill: var(--v-secondary-lighten5)
+
+.svg-accent
+    &.lighten-5
+        fill: var(--v-accent-lighten5)
+
+.svg-error
+    &.lighten-5
+        fill: var(--v-error-lighten5)
+
+.svg-success
+    &.lighten-5
+        fill: var(--v-success-lighten5)
+
+.svg-warning
+    &.lighten-5
+        fill: var(--v-warning-lighten5)
+
+.svg-info
+    &.lighten-5
+        fill: var(--v-info-lighten5)

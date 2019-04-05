@@ -1,0 +1,11 @@
+--- ./../node_modules/svg-to-vue/index.js
++++ ./../node_modules/svg-to-vue/index.js
+@@ -99,7 +99,7 @@
+           return _c(
+             'svg',
+             {
+-              class: [${classNames}],
++              class: [${classNames},'svg'],
+               style: [${styles}],
+               ${attrs},
+               ...rest,
